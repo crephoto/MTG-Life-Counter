@@ -1,2 +1,2 @@
-### Magic the Gathering ###
+# Magic the Gathering #
 ## Life Counter ##
