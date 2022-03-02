@@ -61,4 +61,3 @@ def life_change(player, life):
     life += life_change
     print(f'{player} now has {str(life)} life')
     return(life)
-    
