@@ -1,5 +1,8 @@
 
 # This gets the number of players 
+from numpy import flip
+
+
 def startup():
     players = 0
     while players<2 or players>6:
@@ -61,7 +64,10 @@ def life_change(player, life):
             continue
         advance = True
     life += life_change
-    print(f'{player} now has {str(life)} life')
+    if life <= 0:
+        print(f'{player} has died')
+    else:
+        print(f'{lf(player)} now has {lf(str(life))} life')
     return(life)
 
 # This will allow a user to activate other functions
@@ -76,14 +82,46 @@ def request_query(players, Life):
         else:
             advance = True
     if action == 1:
-        player_index = input(f'Whose life should be changed {players}? ')
+        player_index = input(f'Whose life should be changed? {lf(players)} ')
         player_index = players.index(player_index)
-        life_change(players[player_index], Life[player_index])
+        Life[player_index] = life_change(players[player_index], Life[player_index])
+    if action == 2:
+        dice_roll()
 
 # This will effectivley roll n, n sided dice or flip n coins  
 def dice_roll():
-    pass
+    import random
+    advance = False
+    heads = 0
+    HoT = ["Heads", "Tails"]
+    side_list = []
+    flipping = True
+    while advance == False:
+        sides = input("How many sides should there be? (2 for coinflip, 1 for consecutive coinflip) ")
+        try:
+            sides = int(sides)
+        except ValueError:
+            print("That wasn't a number, Try Again")
+            continue
+        advance = True
+    if sides == 1:
+        while flipping == True:
+            end = random.choice(HoT)
+            if end == "Tails":
+                flipping = False
+            else:
+                heads += 1
+        print(f'It landed on Heads {str(heads)} times')
+    if sides==2:
+        print("It landed on " + random.choice(HoT))
+    if sides > 2:
+        for i in range(sides):
+            side_list.append(i) 
+        print("it rolled a " + str(random.choice(side_list) + 1))
 
 # This will format a list to look like a string when printed
-def list_formating(list):
-    pass
+def lf(list):
+    list = str(list).strip("[]")
+    string = list.replace("'", "")
+    return(string)
+
