@@ -1,8 +1,5 @@
 
 # This gets the number of players 
-from numpy import flip
-
-
 def startup():
     players = 0
     while players<2 or players>6:
@@ -124,4 +121,39 @@ def lf(list):
     list = str(list).strip("[]")
     string = list.replace("'", "")
     return(string)
+
+def commander_dmg(dammage, players, player_num):
+    advance = False
+    while advance == False:
+        decide = input("Type 1 to change commander dammage, type 2 to view current commander dammage ")
+        if decide!="1" and decide!="2":
+            print("That wasn't a 1 or 2 try again")
+        else:
+            advance = True
+    if decide == "1":
+        if dammage == []:
+            repeating = player_num
+            player_1 = []
+            player_2 = []
+            player_3 = []
+            player_4 = []
+            player_5 = []
+            player_6 = []
+            #try doing player[[]*6]
+            while repeating!=0:
+                player_1.append(0)
+                player_2.append(0)
+                if player_num >= 3:  
+                    player_3.append(0)
+                if player_num >= 4:
+                    player_4.append(0)
+                if player_num >= 5:
+                    player_5.append(0)
+                if player_num == 6:
+                    player_6.append(0)
+                repeating += -1
+            
+
+
+            
 
