@@ -1,5 +1,8 @@
 
 # This gets the number of players 
+from numpy import true_divide
+
+
 def startup():
     players = 0
     while players<2 or players>6:
@@ -64,11 +67,11 @@ def life_change(player, life):
     if life <= 0:
         print(f'{player} has died')
     else:
-        print(f'{lf(player)} now has {lf(str(life))} life')
+        print(f'{lf(player, False, 0)} now has {lf(str(life, False, 0))} life')
     return(life)
 
 # This will allow a user to activate other functions
-def request_query(players, Life):
+def request_query(players, Life, player_num):
     advance = False
     print("What would you like to do?")
     while advance == False:
@@ -84,6 +87,8 @@ def request_query(players, Life):
         Life[player_index] = life_change(players[player_index], Life[player_index])
     if action == 2:
         dice_roll()
+    if action == 3:
+        commander_dmg([], player_num)
 
 # This will effectivley roll n, n sided dice or flip n coins  
 def dice_roll():
@@ -117,12 +122,19 @@ def dice_roll():
         print("it rolled a " + str(random.choice(side_list) + 1))
 
 # This will format a list to look like a string when printed
-def lf(list):
-    list = str(list).strip("[]")
-    string = list.replace("'", "")
-    return(string)
+def lf(list, cd, player_num):
+    if cd == True:
+        list = str(list).replace("[", "", 1)
+        list = list.replace("]", "}", player_num)
+        list = list.replace("]", "")
+        list = list.replace("}", "]")
+    else:
+        list = str(list).replace("[", "")
+        list = list.replace("]", "")
+        list = list.replace("'", "")
+    return(list)
 
-def commander_dmg(dammage, players, player_num):
+def commander_dmg(dammage, player_num):
     advance = False
     while advance == False:
         decide = input("Type 1 to change commander dammage, type 2 to view current commander dammage ")
@@ -132,26 +144,9 @@ def commander_dmg(dammage, players, player_num):
             advance = True
     if decide == "1":
         if dammage == []:
-            repeating = player_num
-            player_1 = []
-            player_2 = []
-            player_3 = []
-            player_4 = []
-            player_5 = []
-            player_6 = []
-            #try doing player[[]*6]
-            while repeating!=0:
-                player_1.append(0)
-                player_2.append(0)
-                if player_num >= 3:  
-                    player_3.append(0)
-                if player_num >= 4:
-                    player_4.append(0)
-                if player_num >= 5:
-                    player_5.append(0)
-                if player_num == 6:
-                    player_6.append(0)
-                repeating += -1
+            dammage = [[0]*player_num-1]*player_num
+            print(lf(dammage, True, player_num))
+
             
 
 
