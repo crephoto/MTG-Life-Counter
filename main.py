@@ -5,6 +5,6 @@ players = mtg.player_names(player_num)
 life = mtg.setup(player_num)
 running = True
 while running == True:
-    mtg.request_query(players, life)
+    mtg.request_query(players, life, player_num)
     for i in range(len(players)):
-        print(f'{mtg.lf(players[i])} has {mtg.lf(life[i])} life ')
+        print(f'{mtg.lf(players[i], False)} has {mtg.lf(life[i], False)} life ')
