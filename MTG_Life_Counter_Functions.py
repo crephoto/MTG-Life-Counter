@@ -40,16 +40,8 @@ def setup(player_num):
 # This returns a list of player names, the names will correspond to a life total in the Life list    
 def player_names(player_num):    
         players = []
-        players.append(input("What is the first player's name? "))
-        players.append(input("What is the second player's name? "))
-        if player_num >= 3:
-            players.append(input("What is the third player's name? "))
-        if player_num >= 4:
-            players.append(input("What is the fourth player's name? "))
-        if player_num >= 5:
-            players.append(input("What is the fith player's name? "))
-        if player_num == 6:
-            players.append(input("What is the sixth player's name? "))
+        for i in player_num:
+            players.append(input(f'What is the name of player {i}? '))
         return(players)
 
 # This takes a player's life and changes it by a user-determined ammount
