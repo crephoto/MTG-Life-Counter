@@ -7,4 +7,4 @@ running = True
 while running == True:
     mtg.request_query(players, life, player_num)
     for i in range(len(players)):
-        print(f'{mtg.lf(players[i], False)} has {mtg.lf(life[i], False)} life ')
+        print(f'{mtg.lf(players[i], False, 0)} has {mtg.lf(life[i], False, 0)} life ')

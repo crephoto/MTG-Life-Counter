@@ -1,20 +1,19 @@
 
+
+
+
 # This gets the number of players 
-from numpy import true_divide
-
-
 def startup():
-    players = 0
-    while players<2 or players>6:
-        players = input("How many people are playing (max6) ")
+    advance = False
+    while advance == False:
+        players = input("How many people are playing? ")
         try:
             players = int(players)
         except ValueError:
             print("That isn't an Integer, Try again")
             players = 0
             continue
-        if players>6 or players<2:
-            print("Too many or too little players, Try again")
+        advance = True
     return(players)
 
 # This takes the number of players and returns a list with starting life, this will correspond to a player in the Players list
@@ -26,10 +25,10 @@ def setup(player_num):
         try:
             life_count = int(life_count)
         except ValueError:
-            print("That isn't a whole number, Try again")
+            print("That isn't a natural number, Try again")
             continue
-        if life_count < 0:
-            print("That isn't a whole number, Try again")
+        if life_count <= 0:
+            print("That isn't a natural number, Try again")
             continue
         advance = True
     while player_num > 0:
@@ -40,8 +39,8 @@ def setup(player_num):
 # This returns a list of player names, the names will correspond to a life total in the Life list    
 def player_names(player_num):    
         players = []
-        for i in player_num:
-            players.append(input(f'What is the name of player {i}? '))
+        for i in range(player_num):
+            players.append(input(f'What is the name of player {i+1}? '))
         return(players)
 
 # This takes a player's life and changes it by a user-determined ammount
@@ -59,7 +58,7 @@ def life_change(player, life):
     if life <= 0:
         print(f'{player} has died')
     else:
-        print(f'{lf(player, False, 0)} now has {lf(str(life, False, 0))} life')
+        print(f'{lf(player, False, 0)} now has {lf(str(life), False, 0)} life')
     return(life)
 
 # This will allow a user to activate other functions
@@ -74,7 +73,7 @@ def request_query(players, Life, player_num):
         else:
             advance = True
     if action == 1:
-        player_index = input(f'Whose life should be changed? {lf(players)} ')
+        player_index = input(f'Whose life should be changed? {lf(players, False, 0)} ')
         player_index = players.index(player_index)
         Life[player_index] = life_change(players[player_index], Life[player_index])
     if action == 2:
@@ -126,6 +125,7 @@ def lf(list, cd, player_num):
         list = list.replace("'", "")
     return(list)
 
+# This stores a list filled with a list that has numbers corresponding to each players dammage from a certain other player.
 def commander_dmg(dammage, player_num):
     advance = False
     while advance == False:
@@ -136,11 +136,18 @@ def commander_dmg(dammage, player_num):
             advance = True
     if decide == "1":
         if dammage == []:
-            dammage = [[0]*player_num-1]*player_num
+            dammage = [[0]*(player_num-1)]*player_num
             print(lf(dammage, True, player_num))
 
             
 
-
-            
+def main(player_num):
+    players = player_names(player_num)
+    life = setup(player_num)
+    running = True
+    while running == True:
+        request_query(players, life, player_num)
+        for i in range(len(players)):
+            print(f'{(players[i], False, player_num)} has {lf(life[i], False, player_num)} life ')
+                
 
