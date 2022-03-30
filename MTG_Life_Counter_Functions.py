@@ -1,7 +1,4 @@
 
-
-
-
 # This gets the number of players 
 def startup():
     advance = False
@@ -67,7 +64,11 @@ def request_query(players, Life, player_num):
     print("What would you like to do?")
     while advance == False:
         action = input("type 1 for add/reduce life, 2 to roll a dice or flip a coin, 3 to change commander dammage ")
-        action = int(action)
+        try: 
+            action = int(action)
+        except ValueError:
+            print("That isn't a 1, 2, or 3, Try Again")
+            continue
         if action!=1 and action!=2 and action!=3:
             print("That isn't a 1, 2, or 3, Try Again")
         else:
@@ -79,7 +80,7 @@ def request_query(players, Life, player_num):
     if action == 2:
         dice_roll()
     if action == 3:
-        commander_dmg([], player_num)
+        commander_dmg([], player_num, players)
 
 # This will effectivley roll n, n sided dice or flip n coins  
 def dice_roll():
@@ -126,7 +127,7 @@ def lf(list, cd, player_num):
     return(list)
 
 # This stores a list filled with a list that has numbers corresponding to each players dammage from a certain other player.
-def commander_dmg(dammage, player_num):
+def commander_dmg(dammage, player_num, players):
     advance = False
     while advance == False:
         decide = input("Type 1 to change commander dammage, type 2 to view current commander dammage ")
@@ -134,10 +135,23 @@ def commander_dmg(dammage, player_num):
             print("That wasn't a 1 or 2 try again")
         else:
             advance = True
+    if dammage == []:
+        dammage = [[0]*(player_num-1)]*player_num
+        players_dammage = [[]*(player_num-1)]*player_num
+        for i in range(player_num):
+            print(i)
+            for y in range(player_num):
+                if y == i:
+                    continue
+                else:
+                    print(i, y)
+                    players_dammage[i] += players[y]
+                    print(lf(players_dammage, True, player_num))
     if decide == "1":
-        if dammage == []:
-            dammage = [[0]*(player_num-1)]*player_num
-            print(lf(dammage, True, player_num))
+        pass
+    if decide == "2":
+        #need to get back and write a name next to each list and number or just ask for player 1 and player 2
+        print(lf(players_dammage, True, player_num))
 
             
 
