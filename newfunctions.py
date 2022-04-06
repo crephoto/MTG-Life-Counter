@@ -1,6 +1,8 @@
 from cgi import test
 from tkinter import *
 
+from pyparsing import withClass
+
 def playernamewindow():
     pass
 
@@ -185,19 +187,30 @@ def button_press(which_one):
     import tkinter as tk
     player_num = which_one
     clear_frame()
-    
-    
-    for i in range(player_num):
-        text = tk.Text(screen, height=5, width=10)
-        text.config(state="normal")
-        text.pack()
-        players = [text]
-        print(players)
+    app_display(player_num)
+    #mycommand = Label(screen, text= "who is playing?")
+    #mycommand.pack()
+    players = []
+    #for i in range(player_num):
+    #    
+    #    text = tk.Text(screen, height=1, width=600)
+    #    text.config(state="normal")
+    #    text.pack()
+    #    
+    #    players = [text]
+    #    print(players)
         
 
 def clear_frame():
     for widgets in screen.winfo_children():
         widgets.destroy()
 
+def app_display(which_one):
+    import tkinter as tk
+    for i in range(which_one):
+        text = tk.Text(screen, height=10)
+        text.pack()
+        #text.grid(row=(i%2)+1, column= i+1)
+        #Grid.rowconfigure(screen, i+1, weight =1)
 
 screen.mainloop()
