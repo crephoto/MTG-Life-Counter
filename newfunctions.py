@@ -1,3 +1,4 @@
+from cProfile import label
 from cgi import test
 from tkinter import *
 
@@ -157,6 +158,7 @@ def main(player_num):
 
     
 screen  = Tk()
+screen.resizable(width = False, height = False)
 #creating text
 mylabel = Label(screen, text= "Welcome! Choose how many players are playing.")
 screen.title("The best MTG App!")
@@ -188,29 +190,61 @@ def button_press(which_one):
     player_num = which_one
     clear_frame()
     app_display(player_num)
-    #mycommand = Label(screen, text= "who is playing?")
-    #mycommand.pack()
-    players = []
-    #for i in range(player_num):
-    #    
-    #    text = tk.Text(screen, height=1, width=600)
-    #    text.config(state="normal")
-    #    text.pack()
-    #    
-    #    players = [text]
-    #    print(players)
-        
+   
+
+
 
 def clear_frame():
     for widgets in screen.winfo_children():
         widgets.destroy()
 
-def app_display(which_one):
+
+def app_display(player_num):
+    
+    player = ["Roan", "Zeke", "Mateo", "Luca", "Brock", "Noah"]
+    life_total = [40, 40, 40, 40, 40 ,40]
+    for i in range(player_num):
+        label = Label(screen, text = player[i], font = "times 15")
+        life_label = Label(screen, text=life_total[i], font = "times 24" )
+        label.grid(row = 2*i, column = 0, ipadx = 10, ipady= 10)
+        life_label.grid(row = 2*i+1 , column = 0, ipady = 10, ipadx = 10)
+        
+        
+
+
+
+
+
+
+'''def app_display(which_one):
     import tkinter as tk
+    def nextScreen(players):
+        players.append(text1.get())
+
+        clear_frame()
+    players =[]
     for i in range(which_one):
-        text = tk.Text(screen, height=10)
-        text.pack()
-        #text.grid(row=(i%2)+1, column= i+1)
-        #Grid.rowconfigure(screen, i+1, weight =1)
+        text1 = Entry(screen, width=25)
+        labell = Label(screen, text = f'What is the name of player {str(i+1)}?')
+        btn1 = Button(screen, text="Next", command=nextScreen(players))
+        text1.grid(row=1, column=0, pday=20, pdax=20)
+        labell.grid(row=0, column=0, pday=20, pdax=20)
+        btn1.grid(row=2, column=0, pday=20, pdax=20)'''
+
+'''        text = Entry(screen, width =27)
+        text.insert(INSERT, "type the player names here")
+        my_label = Label(screen, text= "insert")
+        
+        if i<3:
+            text.grid(row = i, column = 0, pady = 20, padx = 20)
+            my_label.place(x= 200, y= 200)
+        
+        else:
+            text.grid(row=i-3, column=1, pady=20, padx=20)
+            my_label.place(x=100, y = 300)
+            
+        players.append(text)'''
+        
+
 
 screen.mainloop()
