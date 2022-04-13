@@ -1,25 +1,18 @@
-#Import the required libraries
+import tkinter as tk
 from tkinter import *
+life = []
+lifeStart = 0
+player_num = 2
+def useless_function(lifeStart, player_num):
+    life = [lifeStart]*player_num
+    print(str(life))
+    return(life)
+screen = Tk()
+screen.geometry("600x600")
+screen. title("Chose how much life you want to start with")
+btn1 = Button(screen, text = "20", width = 20, height = 10, command=lambda lifeStart = 20 : useless_function(lifeStart, player_num))
+btn2 = Button(screen, text = "40", width = 20, height = 10, command=lambda lifeStart = 40 : useless_function(lifeStart, player_num))
+btn1.grid(row = 1, column = 1, ipady=5, ipadx=5)
+btn2.grid(row = 2, column = 1, ipady=5, ipadx=5)
 
-#Create an instance of tkinter frame
-win= Tk()
-
-#Set the geometry of frame
-win.geometry("600x250")
-
-#Create a frame
-frame = Frame(win)
-frame.pack(side="top", expand=True, fill="both")
-
-#Create a text label
-Label(frame,text="Enter the Password", font=('Helvetica',20)).pack(pady=20)
-
-def clear_frame():
-   for widgets in frame.winfo_children():
-      widgets.destroy()
-
-#Create a button to close the window
-Button(frame, text="Clear", font=('Helvetica bold', 10), command=
-clear_frame).pack(pady=20)
-
-win.mainloop()
+screen.mainloop()
