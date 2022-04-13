@@ -2,6 +2,7 @@ from cProfile import label
 from cgi import test
 from tkinter import *
 
+
 from pyparsing import withClass
 
 def playernamewindow():
@@ -156,7 +157,8 @@ def main(player_num):
             print(f'{(players[i], False, player_num)} has {lf(life[i], False, player_num)} life ')
                 
 
-    
+
+  
 screen  = Tk()
 screen.resizable(width = False, height = False)
 #creating text
@@ -203,13 +205,68 @@ def app_display(player_num):
     
     player = ["Roan", "Zeke", "Mateo", "Luca", "Brock", "Noah"]
     life_total = [40, 40, 40, 40, 40 ,40]
+    y=player_num
+    u=player_num
     for i in range(player_num):
         label = Label(screen, text = player[i], font = "times 15")
-        life_label = Label(screen, text=life_total[i], font = "times 24" )
+        life_label = Label(screen, text=int(life_total[i]), font = "times 24" )
         label.grid(row = 2*i, column = 0, ipadx = 10, ipady= 10)
         life_label.grid(row = 2*i+1 , column = 0, ipady = 10, ipadx = 10)
+    while y>0:
+        butadd_play1 = Button(screen, text = "+")
+        butsub_play1 = Button(screen, text = "- ")
+        y-=1
+        butadd_play2 = Button(screen, text = "+")
+        butsub_play2 = Button(screen, text = "- ")
+        y-=1
+        butadd_play3 = Button(screen, text = "+")
+        butsub_play3 = Button(screen, text = "- ")
+        y-=1
+        butadd_play4 = Button(screen, text = "+")
+        butsub_play4 = Button(screen, text = "- ")
+        y-=1
+        butadd_play5 = Button(screen, text = "+")
+        butsub_play5 = Button(screen, text = "- ")
+        y-=1
+        butadd_play6 = Button(screen, text = "+")
+        butsub_play6 = Button(screen, text = "- ")
+    while u>0:
+        butadd_play1.grid(row= 1, column = 2, ipady= 11, ipadx = 11)
+        butsub_play1.grid(row= 1, column = 1, ipady= 11, ipadx = 11)
+        u-=1
+        butadd_play2.grid(row= 3, column = 2, ipady= 11, ipadx = 11)
+        butsub_play2.grid(row= 3, column = 1, ipady= 11, ipadx = 11)
+        u-=1
+        butadd_play3.grid(row= 5, column = 2, ipady= 11, ipadx = 11)
+        butsub_play3.grid(row= 5, column = 1, ipady= 11, ipadx = 11)
+        u-=1
+        butadd_play4.grid(row= 7, column = 2, ipady= 11, ipadx = 11)
+        butsub_play4.grid(row= 7, column = 1, ipady= 11, ipadx = 11)
+        u-=1
+        butadd_play5.grid(row= 9, column = 2, ipady= 11, ipadx = 11)
+        butsub_play5.grid(row= 9, column = 1, ipady= 11, ipadx = 11)
+        u-=1
+        butadd_play6.grid(row= 11, column = 2, ipady= 11, ipadx = 11)
+        butsub_play6.grid(row= 11, column = 1, ipady= 11, ipadx = 11)
+
+
         
+    
         
+def life_start(player_num):      
+    life = []
+    lifeStart = 0
+    def useless_function(lifeStart, player_num):
+        life = [lifeStart]*player_num
+        print(str(life))
+        return(life)
+    screen. title("Chose how much life you want to start with")
+    btn1 = Button(screen, text = "20", width = 20, height = 10, command=lambda lifeStart = 20 : useless_function(lifeStart, player_num))
+    btn2 = Button(screen, text = "40", width = 20, height = 10, command=lambda lifeStart = 40 : useless_function(lifeStart, player_num))
+    btn1.grid(row = 1, column = 1, ipady=5, ipadx=5)
+    btn2.grid(row = 2, column = 1, ipady=5, ipadx=5)
+    return(life)
+
 
 
 
